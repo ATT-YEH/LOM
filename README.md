@@ -10,6 +10,7 @@
 | [路線攻略/](路線攻略/README.md) | 整條線流程表：小梅（西武林／遣散）、郁竹、夏侯蘭、葉雲裳、滅門線（汗青書46），附結緣對象 × 結局速查 |
 | ↳ [滅門線_單身_瑞笙對策.md](路線攻略/滅門線_單身_瑞笙對策.md) | 汗青書46 專用周目：滅門線瑞笙的幫手 buff、養成方向、戰術時間點、實戰流程 |
 | `文本/` | 每輪匯出的 LOM_Legend 結局原文 |
+| [工具/LOM存檔備份.bat](工具/LOM存檔備份.bat) | 一鍵把遊戲存檔備份到私人 repo（見下方「遊戲存檔備份」） |
 
 ## 跟 Claude 專案的分工
 - **這個 repo**：大檔原文、會持續累積的表格。
@@ -19,3 +20,13 @@
 1. 玩的時候在對話裡丟資訊，例如：「第二年 4 月上 偷衣服，選拜師，夏侯蘭 +1；平禮要性情 ≥60」。
 2. 新結局：把匯出的 `LOM_Legend_*.txt` 傳進對話，檔名格式 `編號結局名-周目路線.txt`。
 3. Claude 整理進表格後 commit。
+
+## 遊戲存檔備份（2026-11-23 起）
+- 存檔放在另一個**私人** repo `LOM-save-backup`（存檔資料夾名稱含 Steam ID，所以不放這個公開庫）。
+- 用法：**關遊戲 → 雙擊 [`工具/LOM存檔備份.bat`](工具/LOM存檔備份.bat)** → 看到 `[DONE]` 就完成。解完新汗青書／風雲史就跑一次；沒變動會顯示 `Nothing changed`。
+- 需要：Git for Windows（第一次推送會跳 GitHub 登入）。
+- 備份內容：
+  - `Mortal/` ← `%USERPROFILE%\AppData\LocalLow\Obb Studio\Mortal`（含 `Save_universe.json`，推測是跨周目收集進度；這個資料夾也在 Steam 雲端同步範圍）
+  - `registry.reg` ← 登錄檔 `HKCU\Software\Obb Studio\Mortal`（Steam 雲端**不會**同步）
+- 備份 repo 有 `.gitattributes`（`* -text`），存檔保持原樣不轉換換行。
+- 還原：裝好遊戲先開一次再關 → 下載 `LOM-save-backup` → `Mortal` 蓋回 `AppData\LocalLow\Obb Studio\` → 雙擊 `registry.reg` 匯入。要回舊版就從 commit 紀錄挑日期。
